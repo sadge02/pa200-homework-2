@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PA200 Cloud Application</title>
+    <link
+      rel="stylesheet"
+      href="https://pa200hw2slesar.blob.core.windows.net/static/style.css"
+    />
+  </head>
+  <body>
+    <div class="app-container">
+      <div class="header">
+        <h1>PA200 Cloud Tasks</h1>
+        <div class="status">
+          Database Status:
+          <span
+            style="font-weight: bold; color: {{ '#a7f3d0' if db_status == 'Connected' else '#fca5a5' }}"
+          >
+            {{ db_status }}
+          </span>
+        </div>
+      </div>
+
+      <div class="content">
+        <form action="/add" method="POST" class="input-group">
+          <input
+            type="text"
+            name="task_name"
+            placeholder="What needs to be done?"
+            required
+            autocomplete="off"
+          />
+          <button type="submit">Add Task</button>
+        </form>
+
+        <ul class="task-list">
+          {% if tasks %} {% for task in tasks %}
+          <li class="task-item">{{ task.name }}</li>
+          {% endfor %} {% else %}
+          <li class="task-item" style="color: #9ca3af; justify-content: center">
+            No tasks yet. Add one above!
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </body>
+</html>
